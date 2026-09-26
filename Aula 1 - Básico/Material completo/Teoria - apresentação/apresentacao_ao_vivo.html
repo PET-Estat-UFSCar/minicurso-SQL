@@ -596,7 +596,13 @@ const data=[{"id": 2, "nome": "Bayes", "profissao": "funileiro", "cidade": "sao 
 const slides=[...document.querySelectorAll('.slide')]; let current=0;
 function show(i){current=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,j)=>s.classList.toggle('active',j===current));document.querySelector('.progress').style.width=((current+1)/slides.length*100)+'%';}
 document.querySelector('#prev').onclick=()=>show(current-1); document.querySelector('#next').onclick=()=>show(current+1);
-document.addEventListener('keydown',e=>{if((e.key==='ArrowRight'||e.key==='PageDown')&&!e.target.matches('textarea,input'))show(current+1);if((e.key==='ArrowLeft'||e.key==='PageUp')&&!e.target.matches('textarea,input'))show(current-1)}); show(0);
+document.addEventListener('keydown',e=>{
+ const alvo=e.target;
+ const editando=alvo.matches('textarea,input') || alvo.isContentEditable || !!alvo.closest('[contenteditable="true"],.ceditor');
+ if(editando) return;
+ if(e.key==='ArrowRight'||e.key==='PageDown') show(current+1);
+ if(e.key==='ArrowLeft'||e.key==='PageUp') show(current-1);
+}); show(0);
 
 const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 function colorize(code, action){
