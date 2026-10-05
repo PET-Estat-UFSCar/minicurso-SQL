@@ -1,0 +1,211 @@
+nome,autor,genero,paginas,capitulos,valor,unidades_vendidas,pais,continente
+Dom Casmurro,Machado de Assis,Clássico,256,14,74.66,19184,Brasil,América do Sul
+Memórias Póstumas de Brás Cubas,Machado de Assis,Clássico,272,10,39.67,17725,Brasil,América do Sul
+Grande Sertão: Veredas,Guimarães Rosa,Clássico,624,38,35.99,16075,Brasil,América do Sul
+Capitães da Areia,Jorge Amado,Clássico,280,11,46.19,15128,Brasil,América do Sul
+"Gabriela, Cravo e Canela",Jorge Amado,Romance,424,18,78.99,37299,Brasil,América do Sul
+Vidas Secas,Graciliano Ramos,Clássico,176,10,86.56,19573,Brasil,América do Sul
+O Cortiço,Aluísio Azevedo,Clássico,288,10,59.48,11996,Brasil,América do Sul
+Iracema,José de Alencar,Clássico,128,6,53.46,11048,Brasil,América do Sul
+A Hora da Estrela,Clarice Lispector,Clássico,96,4,53.98,41320,Brasil,América do Sul
+Cem Anos de Solidão,Gabriel García Márquez,Realismo Mágico,448,23,67.44,21365,Colômbia,América do Sul
+O Amor nos Tempos do Cólera,Gabriel García Márquez,Romance,464,18,73.9,46471,Colômbia,América do Sul
+A Casa dos Espíritos,Isabel Allende,Realismo Mágico,496,17,33.11,39788,Chile,América do Sul
+Ficções,Jorge Luis Borges,Conto,174,8,89.77,11052,Argentina,América do Sul
+Rayuela,Julio Cortázar,Romance,640,35,88.29,10829,Argentina,América do Sul
+Pedro Páramo,Juan Rulfo,Romance,124,7,48.59,16205,México,América do Norte
+Como Água para Chocolate,Laura Esquivel,Romance,246,13,80.94,12900,México,América do Norte
+1984,George Orwell,Distopia,328,12,94.68,35807,Reino Unido,Europa
+A Revolução dos Bichos,George Orwell,Fábula,152,6,35.52,41981,Reino Unido,Europa
+Admirável Mundo Novo,Aldous Huxley,Distopia,288,10,57.98,7247,Reino Unido,Europa
+Fahrenheit 451,Ray Bradbury,Distopia,256,11,91.25,21852,Estados Unidos,América do Norte
+Neuromancer,William Gibson,Ficção Científica,271,16,91.83,45716,Estados Unidos,América do Norte
+Duna,Frank Herbert,Ficção Científica,604,28,82.05,38615,Estados Unidos,América do Norte
+Fundação,Isaac Asimov,Ficção Científica,255,9,70.75,22304,Estados Unidos,América do Norte
+"Eu, Robô",Isaac Asimov,Ficção Científica,253,9,65.57,19505,Estados Unidos,América do Norte
+O Guia do Mochileiro das Galáxias,Douglas Adams,Ficção Científica,224,11,40.6,20321,Reino Unido,Europa
+Frankenstein,Mary Shelley,Terror,280,13,34.35,79537,Reino Unido,Europa
+Drácula,Bram Stoker,Terror,418,25,47.5,17806,Irlanda,Europa
+O Iluminado,Stephen King,Terror,497,25,91.84,39586,Estados Unidos,América do Norte
+It: A Coisa,Stephen King,Terror,1138,39,50.45,12708,Estados Unidos,América do Norte
+"Carrie, a Estranha",Stephen King,Terror,199,8,91.21,48734,Estados Unidos,América do Norte
+Sherlock Holmes: Um Estudo em Vermelho,Arthur Conan Doyle,Policial,154,8,65.44,22086,Reino Unido,Europa
+Assassinato no Expresso Oriente,Agatha Christie,Policial,256,10,74.63,11877,Reino Unido,Europa
+E Não Sobrou Nenhum,Agatha Christie,Policial,264,12,67.66,15976,Reino Unido,Europa
+O Nome da Rosa,Umberto Eco,Suspense,512,19,37.73,66813,Itália,Europa
+O Código Da Vinci,Dan Brown,Suspense,489,21,51.43,7919,Estados Unidos,América do Norte
+Anjos e Demônios,Dan Brown,Suspense,616,21,35.41,166884,Estados Unidos,América do Norte
+Garota Exemplar,Gillian Flynn,Suspense,463,21,67.19,5388,Estados Unidos,América do Norte
+Orgulho e Preconceito,Jane Austen,Romance,432,18,68.39,28745,Reino Unido,Europa
+Razão e Sensibilidade,Jane Austen,Romance,409,19,97.41,37082,Reino Unido,Europa
+Jane Eyre,Charlotte Brontë,Romance,507,22,76.92,37071,Reino Unido,Europa
+O Morro dos Ventos Uivantes,Emily Brontë,Romance,416,27,38.37,7881,Reino Unido,Europa
+Grandes Esperanças,Charles Dickens,Clássico,544,21,68.67,5323,Reino Unido,Europa
+Oliver Twist,Charles Dickens,Clássico,608,22,34.02,22871,Reino Unido,Europa
+Um Conto de Natal,Charles Dickens,Clássico,128,6,34.86,17531,Reino Unido,Europa
+Guerra e Paz,Liev Tolstói,Clássico,1225,55,67.65,63739,Rússia,Europa
+Anna Kariênina,Liev Tolstói,Clássico,864,40,58.39,4680,Rússia,Europa
+Crime e Castigo,Fiódor Dostoiévski,Clássico,671,42,59.55,175490,Rússia,Europa
+Os Irmãos Karamázov,Fiódor Dostoiévski,Clássico,824,32,75.64,3863,Rússia,Europa
+O Apanhador no Campo de Centeio,J.D. Salinger,Romance,224,13,85.94,8094,Estados Unidos,América do Norte
+O Grande Gatsby,F. Scott Fitzgerald,Clássico,180,8,61.3,33142,Estados Unidos,América do Norte
+Moby Dick,Herman Melville,Aventura,720,26,91.11,12470,Estados Unidos,América do Norte
+As Aventuras de Huckleberry Finn,Mark Twain,Aventura,366,16,68.42,17173,Estados Unidos,América do Norte
+O Velho e o Mar,Ernest Hemingway,Clássico,128,5,30.93,23343,Estados Unidos,América do Norte
+Matar um Rouxinol,Harper Lee,Clássico,336,12,41.54,106644,Estados Unidos,América do Norte
+As Vinhas da Ira,John Steinbeck,Clássico,464,16,93.07,11026,Estados Unidos,América do Norte
+O Hobbit,J.R.R. Tolkien,Fantasia,310,12,48.46,71344,Reino Unido,Europa
+O Senhor dos Anéis: A Sociedade do Anel,J.R.R. Tolkien,Fantasia,576,30,81.04,47863,Reino Unido,Europa
+O Senhor dos Anéis: As Duas Torres,J.R.R. Tolkien,Fantasia,448,28,97.71,19329,Reino Unido,Europa
+O Senhor dos Anéis: O Retorno do Rei,J.R.R. Tolkien,Fantasia,464,21,70.79,3779,Reino Unido,Europa
+O Silmarillion,J.R.R. Tolkien,Fantasia,365,15,89.49,15888,Reino Unido,Europa
+"As Crônicas de Nárnia: O Leão, a Feiticeira e o Guarda-Roupa",C.S. Lewis,Fantasia,208,9,46.36,23685,Reino Unido,Europa
+Harry Potter e a Pedra Filosofal,J.K. Rowling,Fantasia,264,12,70.42,16436,Reino Unido,Europa
+Harry Potter e a Câmara Secreta,J.K. Rowling,Fantasia,288,16,70.76,70592,Reino Unido,Europa
+Harry Potter e o Prisioneiro de Azkaban,J.K. Rowling,Fantasia,317,19,80.03,16952,Reino Unido,Europa
+Harry Potter e o Cálice de Fogo,J.K. Rowling,Fantasia,636,24,75.09,76911,Reino Unido,Europa
+Harry Potter e a Ordem da Fênix,J.K. Rowling,Fantasia,870,37,34.98,131808,Reino Unido,Europa
+Harry Potter e o Enigma do Príncipe,J.K. Rowling,Fantasia,512,30,36.9,27764,Reino Unido,Europa
+Harry Potter e as Relíquias da Morte,J.K. Rowling,Fantasia,608,30,54.33,22283,Reino Unido,Europa
+Jogos Vorazes,Suzanne Collins,Distopia,374,13,40.94,32525,Estados Unidos,América do Norte
+Em Chamas,Suzanne Collins,Distopia,391,17,75.68,17526,Estados Unidos,América do Norte
+A Esperança,Suzanne Collins,Distopia,455,27,95.12,23625,Estados Unidos,América do Norte
+Divergente,Veronica Roth,Distopia,487,28,37.98,19204,Estados Unidos,América do Norte
+A Culpa é das Estrelas,John Green,Romance,288,16,49.62,37292,Estados Unidos,América do Norte
+Como Eu Era Antes de Você,Jojo Moyes,Romance,400,21,74.3,27743,Reino Unido,Europa
+O Pequeno Príncipe,Antoine de Saint-Exupéry,Fábula,96,4,38.16,4576,França,Europa
+Alice no País das Maravilhas,Lewis Carroll,Fantasia,200,12,49.27,10005,Reino Unido,Europa
+As Aventuras de Pinóquio,Carlo Collodi,Fábula,224,10,39.6,19177,Itália,Europa
+Charlie e a Fábrica de Chocolate,Roald Dahl,Infantojuvenil,192,7,37.83,5017,Reino Unido,Europa
+Matilda,Roald Dahl,Infantojuvenil,240,9,45.73,14775,Reino Unido,Europa
+James e o Pêssego Gigante,Roald Dahl,Infantojuvenil,176,11,42.48,12170,Reino Unido,Europa
+O Menino do Pijama Listrado,John Boyne,Drama,224,12,55.43,22725,Irlanda,Europa
+A Menina que Roubava Livros,Markus Zusak,Drama,552,24,47.37,10457,Austrália,Oceania
+O Diário de Anne Frank,Anne Frank,Biografia,283,15,91.13,23329,Holanda,Europa
+Sapiens: Uma Breve História da Humanidade,Yuval Noah Harari,Não-ficção,464,30,41.28,22331,Israel,Ásia
+Homo Deus,Yuval Noah Harari,Não-ficção,448,21,81.46,60311,Israel,Ásia
+21 Lições para o Século 21,Yuval Noah Harari,Não-ficção,412,15,76.79,17006,Israel,Ásia
+O Poder do Hábito,Charles Duhigg,Autoajuda,408,22,37.47,21818,Estados Unidos,América do Norte
+Os 7 Hábitos das Pessoas Altamente Eficazes,Stephen Covey,Autoajuda,372,14,87.06,82938,Estados Unidos,América do Norte
+Como Fazer Amigos e Influenciar Pessoas,Dale Carnegie,Autoajuda,288,16,90.89,6064,Estados Unidos,América do Norte
+"Pai Rico, Pai Pobre",Robert Kiyosaki,Não-ficção,336,18,52.88,24255,Estados Unidos,América do Norte
+O Homem Mais Rico da Babilônia,George S. Clason,Não-ficção,144,5,74.8,88945,Estados Unidos,América do Norte
+Mindset,Carol Dweck,Autoajuda,312,11,53.08,5095,Estados Unidos,América do Norte
+Rápido e Devagar,Daniel Kahneman,Não-ficção,608,25,42.4,6721,Israel,Ásia
+Uma Breve História do Tempo,Stephen Hawking,Não-ficção,256,9,54.1,36956,Reino Unido,Europa
+Cosmos,Carl Sagan,Não-ficção,384,15,38.0,16462,Estados Unidos,América do Norte
+A Origem das Espécies,Charles Darwin,Não-ficção,502,31,30.02,21389,Reino Unido,Europa
+O Príncipe,Nicolau Maquiavel,Filosofia,128,5,76.4,49562,Itália,Europa
+A República,Platão,Filosofia,416,17,38.62,27820,Grécia,Europa
+Meditações,Marco Aurélio,Filosofia,254,14,52.73,29948,Itália,Europa
+Assim Falou Zaratustra,Friedrich Nietzsche,Filosofia,352,12,76.45,88698,Alemanha,Europa
+O Mundo de Sofia,Jostein Gaarder,Filosofia,656,24,72.99,23273,Noruega,Europa
+Folhas de Relva,Walt Whitman,Poesia,448,19,27.6,24344,Estados Unidos,América do Norte
+Antologia Poética,Pablo Neruda,Poesia,320,13,36.37,99521,Chile,América do Sul
+Poemas,Fernando Pessoa,Poesia,256,13,32.78,17324,Portugal,Europa
+Antologia Poética,Carlos Drummond de Andrade,Poesia,240,8,36.6,13803,Brasil,América do Sul
+Meu Amado Poeta,Vinícius de Moraes,Poesia,200,11,25.87,15108,Brasil,América do Sul
+O Corvo e Outros Poemas,Edgar Allan Poe,Poesia,96,4,20.61,49277,Estados Unidos,América do Norte
+Dom Quixote,Miguel de Cervantes,Clássico,863,35,83.69,94599,Espanha,Europa
+A Metamorfose,Franz Kafka,Clássico,96,5,43.51,68117,República Tcheca,Europa
+O Processo,Franz Kafka,Clássico,304,11,75.82,22584,República Tcheca,Europa
+Os Miseráveis,Victor Hugo,Clássico,1463,54,91.88,37119,França,Europa
+O Corcunda de Notre-Dame,Victor Hugo,Clássico,512,27,78.61,29039,França,Europa
+O Conde de Monte Cristo,Alexandre Dumas,Aventura,1276,58,89.28,44001,França,Europa
+Os Três Mosqueteiros,Alexandre Dumas,Aventura,700,25,67.08,71627,França,Europa
+Madame Bovary,Gustave Flaubert,Clássico,336,14,72.79,105939,França,Europa
+O Estrangeiro,Albert Camus,Clássico,128,5,92.7,101012,Argélia,África
+A Peste,Albert Camus,Clássico,336,15,88.69,39461,Argélia,África
+Náusea,Jean-Paul Sartre,Filosofia,256,10,73.77,24794,França,Europa
+O Retrato de Dorian Gray,Oscar Wilde,Clássico,254,11,46.31,29080,Irlanda,Europa
+Os Buddenbrooks,Thomas Mann,Clássico,731,42,39.59,22236,Alemanha,Europa
+A Montanha Mágica,Thomas Mann,Clássico,720,31,44.88,58354,Alemanha,Europa
+O Perfume,Patrick Süskind,Suspense,320,15,59.0,42480,Alemanha,Europa
+Se um Viajante numa Noite de Inverno,Italo Calvino,Romance,260,10,83.79,21776,Itália,Europa
+O Barão nas Árvores,Italo Calvino,Fábula,256,13,27.61,23711,Itália,Europa
+O Alquimista,Paulo Coelho,Ficção,208,8,57.2,73049,Brasil,América do Sul
+Onze Minutos,Paulo Coelho,Romance,288,15,85.89,26970,Brasil,América do Sul
+Brida,Paulo Coelho,Ficção,264,10,63.89,50314,Brasil,América do Sul
+Torto Arado,Itamar Vieira Junior,Romance,336,12,58.2,21411,Brasil,América do Sul
+Quarto de Despejo,Carolina Maria de Jesus,Autobiografia,176,7,98.55,22905,Brasil,América do Sul
+Confissões de uma Máscara,Yukio Mishima,Romance,256,15,76.31,16961,Japão,Ásia
+Norwegian Wood,Haruki Murakami,Romance,400,20,62.22,8353,Japão,Ásia
+Kafka à Beira-Mar,Haruki Murakami,Ficção,656,32,61.73,58883,Japão,Ásia
+1Q84,Haruki Murakami,Ficção Científica,944,58,82.54,40880,Japão,Ásia
+A Sombra do Vento,Carlos Ruiz Zafón,Suspense,565,28,31.26,24997,Espanha,Europa
+O Jogo do Anjo,Carlos Ruiz Zafón,Suspense,544,19,75.41,19470,Espanha,Europa
+Os Filhos da Meia-Noite,Salman Rushdie,Ficção,576,31,43.86,16480,Índia,Ásia
+Água para Elefantes,Sara Gruen,Romance,368,20,63.05,15189,Estados Unidos,América do Norte
+O Caçador de Pipas,Khaled Hosseini,Drama,372,15,78.86,18825,Afeganistão,Ásia
+Mil Sóis Esplêndidos,Khaled Hosseini,Drama,416,24,82.25,20000,Afeganistão,Ásia
+O Alienista,Machado de Assis,Clássico,96,4,51.67,23399,Brasil,América do Sul
+Memórias de um Sargento de Milícias,Manuel Antônio de Almeida,Clássico,288,11,93.46,57123,Brasil,América do Sul
+Senhora,José de Alencar,Romance,224,8,35.22,9585,Brasil,América do Sul
+Til,José de Alencar,Romance,240,10,89.42,20415,Brasil,América do Sul
+Lucíola,José de Alencar,Romance,192,12,32.77,86921,Brasil,América do Sul
+O Guarani,José de Alencar,Aventura,368,13,75.23,21615,Brasil,América do Sul
+Jurassic Park,Michael Crichton,Ficção Científica,448,16,37.29,50401,Estados Unidos,América do Norte
+O Andrômeda,Michael Crichton,Ficção Científica,320,14,79.41,32315,Estados Unidos,América do Norte
+Perdido em Marte,Andy Weir,Ficção Científica,384,14,75.43,103677,Estados Unidos,América do Norte
+Ready Player One,Ernest Cline,Ficção Científica,384,14,71.37,64990,Estados Unidos,América do Norte
+A Estrada,Cormac McCarthy,Distopia,256,12,35.97,63895,Estados Unidos,América do Norte
+Laranja Mecânica,Anthony Burgess,Distopia,176,8,72.62,50344,Reino Unido,Europa
+Nós,Yevgeni Zamiatin,Distopia,240,9,52.65,58181,Rússia,Europa
+O Homem Duplicado,José Saramago,Romance,336,15,53.72,30010,Portugal,Europa
+Ensaio sobre a Cegueira,José Saramago,Romance,352,16,43.27,37403,Portugal,Europa
+O Evangelho Segundo Jesus Cristo,José Saramago,Romance,448,20,82.97,136262,Portugal,Europa
+Memorial do Convento,José Saramago,Romance,384,18,85.41,9120,Portugal,Europa
+Meio Sol Amarelo,Chimamanda Ngozi Adichie,Romance,448,20,46.93,39445,Nigéria,África
+Americanah,Chimamanda Ngozi Adichie,Romance,588,27,59.69,31247,Nigéria,África
+Tudo Se Desmorona,Chinua Achebe,Clássico,224,13,51.36,10429,Nigéria,África
+Longa Marcha até a Liberdade,Nelson Mandela,Biografia,656,25,38.27,6809,África do Sul,África
+O Menino que Descobriu o Vento,William Kamkwamba,Biografia,288,10,49.25,49122,Malawi,África
+Amada,Toni Morrison,Romance,352,23,50.64,19612,Estados Unidos,América do Norte
+"Vermelho, Branco & Sangue Azul",Casey McQuiston,Romance,448,28,67.29,7048,Estados Unidos,América do Norte
+Onde Vivem os Monstros,Maurice Sendak,Infantojuvenil,48,2,33.76,16852,Estados Unidos,América do Norte
+A Leste do Éden,John Steinbeck,Clássico,608,28,37.08,15416,Estados Unidos,América do Norte
+O Poderoso Chefão,Mario Puzo,Suspense,448,24,60.73,24223,Estados Unidos,América do Norte
+Rebecca,Daphne du Maurier,Suspense,448,21,90.22,20997,Reino Unido,Europa
+A Ilha do Tesouro,Robert Louis Stevenson,Aventura,320,12,35.09,5913,Reino Unido,Europa
+O Médico e o Monstro,Robert Louis Stevenson,Terror,144,9,96.34,24863,Reino Unido,Europa
+Viagem ao Centro da Terra,Júlio Verne,Aventura,256,12,83.41,39906,França,Europa
+Vinte Mil Léguas Submarinas,Júlio Verne,Aventura,368,12,93.5,43707,França,Europa
+A Volta ao Mundo em 80 Dias,Júlio Verne,Aventura,224,9,51.28,16216,França,Europa
+A Guerra dos Mundos,H.G. Wells,Ficção Científica,256,13,96.23,33148,Reino Unido,Europa
+A Máquina do Tempo,H.G. Wells,Ficção Científica,118,7,35.58,12821,Reino Unido,Europa
+O Homem Invisível,H.G. Wells,Ficção Científica,176,8,30.09,144086,Reino Unido,Europa
+O Conto da Aia,Margaret Atwood,Distopia,412,16,32.18,36813,Canadá,América do Norte
+Vida de Pi,Yann Martel,Aventura,336,13,61.68,46575,Canadá,América do Norte
+O Jardim Secreto,Frances Hodgson Burnett,Infantojuvenil,288,12,43.75,24131,Reino Unido,Europa
+Peter Pan,J.M. Barrie,Fantasia,176,11,75.23,42198,Reino Unido,Europa
+Mary Poppins,P.L. Travers,Infantojuvenil,224,8,29.98,31776,Austrália,Oceania
+Meu Pé de Laranja Lima,José Mauro de Vasconcelos,Drama,192,8,94.38,42383,Brasil,América do Sul
+Feliz Ano Velho,Marcelo Rubens Paiva,Drama,176,8,78.88,27521,Brasil,América do Sul
+Cidade de Deus,Paulo Lins,Drama,464,18,35.53,22512,Brasil,América do Sul
+Olga,Fernando Morais,Biografia,392,13,72.16,4554,Brasil,América do Sul
+1808,Laurentino Gomes,História,408,16,88.42,24990,Brasil,América do Sul
+Brasil: Uma Biografia,Lilia Schwarcz e Heloisa Starling,História,936,53,48.77,19669,Brasil,América do Sul
+Raízes do Brasil,Sérgio Buarque de Holanda,Não-ficção,220,12,66.23,184893,Brasil,América do Sul
+Casa-Grande & Senzala,Gilberto Freyre,Não-ficção,726,33,70.87,194429,Brasil,América do Sul
+Os Sertões,Euclides da Cunha,Não-ficção,512,18,58.48,52734,Brasil,América do Sul
+American Gods,Neil Gaiman,Fantasia,635,22,52.99,71879,Reino Unido,Europa
+Coraline,Neil Gaiman,Infantojuvenil,192,10,49.41,12733,Reino Unido,Europa
+Bom Presságios,Neil Gaiman e Terry Pratchett,Fantasia,432,16,52.53,109802,Reino Unido,Europa
+A Cor Mágica,Terry Pratchett,Fantasia,224,13,29.98,94384,Reino Unido,Europa
+Trono de Vidro,Sarah J. Maas,Fantasia,406,15,55.22,132573,Estados Unidos,América do Norte
+A Corte de Rosas e Espinhos,Sarah J. Maas,Fantasia,432,20,44.15,23372,Estados Unidos,América do Norte
+O Nome do Vento,Patrick Rothfuss,Fantasia,662,27,78.78,3149,Estados Unidos,América do Norte
+A Roda do Tempo: O Olho do Mundo,Robert Jordan,Fantasia,782,51,85.85,9491,Estados Unidos,América do Norte
+A Guerra dos Tronos,George R.R. Martin,Fantasia,694,24,58.46,49651,Estados Unidos,América do Norte
+A Fúria dos Reis,George R.R. Martin,Fantasia,761,44,62.2,17073,Estados Unidos,América do Norte
+A Tormenta de Espadas,George R.R. Martin,Fantasia,973,51,95.19,27899,Estados Unidos,América do Norte
+Percy Jackson e o Ladrão de Raios,Rick Riordan,Fantasia,375,16,88.33,63871,Estados Unidos,América do Norte
+Crepúsculo,Stephenie Meyer,Romance,498,26,56.75,21940,Estados Unidos,América do Norte
+Lua Nova,Stephenie Meyer,Romance,563,21,85.2,50735,Estados Unidos,América do Norte
+Eclipse,Stephenie Meyer,Romance,629,32,48.6,8863,Estados Unidos,América do Norte
+Diário de um Banana,Jeff Kinney,Infantojuvenil,224,10,42.61,175746,Estados Unidos,América do Norte
+O Símbolo Perdido,Dan Brown,Suspense,528,23,63.8,44754,Estados Unidos,América do Norte
+Inferno,Dan Brown,Suspense,480,16,61.77,66198,Estados Unidos,América do Norte
+As Memórias de Sherlock Holmes,Arthur Conan Doyle,Policial,320,12,46.62,38775,Reino Unido,Europa
+O Cão dos Baskerville,Arthur Conan Doyle,Policial,256,9,32.96,146941,Reino Unido,Europa
+Os Crimes da Rua Morgue e Outras Histórias,Edgar Allan Poe,Terror,240,15,56.93,13644,Estados Unidos,América do Norte
