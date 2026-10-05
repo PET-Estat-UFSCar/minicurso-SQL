@@ -1,0 +1,1517 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Aula 2 SQL com tabelas completa</title>
+    <style>
+        :root {
+            --wine: #741b36;
+            --wine2: #9b3151;
+            --off: #f8f4eb;
+            --paper: #fffdf8;
+            --ink: #2c1820;
+            --blue: #58a6ff;
+            --yellow: #ffd866;
+            --purple: #c792ea;
+            --orange: #f5a65b;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: #24191d;
+            font-family: Inter, Segoe UI, Arial, sans-serif;
+            color: var(--wine);
+            overflow: hidden
+        }
+
+        .deck {
+            height: 100vh;
+            width: 100vw
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: var(--off);
+            padding: 5.5vh 7vw 5vh;
+            overflow: auto
+        }
+
+        .slide.active {
+            display: block
+        }
+
+        .topline {
+            position: absolute;
+            top: 2.4vh;
+            left: 7vw;
+            right: 7vw;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #9c6c79
+        }
+
+        h1 {
+            font-size: clamp(54px, 7vw, 104px);
+            line-height: .95;
+            margin: 18vh 0 20px;
+            letter-spacing: -.05em
+        }
+
+        h2 {
+            font-size: clamp(34px, 4.2vw, 64px);
+            margin: 3vh 0 8px;
+            letter-spacing: -.035em
+        }
+
+        h3 {
+            font-size: 28px;
+            margin: 0 0 14px
+        }
+
+        p,
+        li {
+            font-size: clamp(18px, 1.55vw, 26px);
+            line-height: 1.45
+        }
+
+        .subtitle {
+            font-size: clamp(22px, 2.2vw, 34px);
+            color: #9b6677
+        }
+
+        .badge {
+            display: inline-block;
+            border: 1px solid #d8b8c1;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 14px;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .heroLine {
+            width: 110px;
+            height: 7px;
+            background: var(--wine);
+            margin: 26px 0
+        }
+
+        .repo {
+            margin-top: 42px;
+            padding: 18px 22px;
+            border: 1px solid #d8b8c1;
+            border-radius: 14px;
+            background: #fff9f2;
+            max-width: 780px
+        }
+
+        .repo input {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            color: var(--wine);
+            font: 600 18px ui-monospace, monospace;
+            outline: none
+        }
+
+        .grid2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 34px;
+            align-items: stretch;
+            margin-top: 5vh
+        }
+
+        .grid3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: stretch;
+            margin-top: 5vh
+        }
+
+        .grid4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            align-items: stretch;
+            margin-top: 4vh
+        }
+
+        .card {
+            background: var(--paper);
+            border: 1px solid #ead9dd;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 8px 30px #5d26300d
+        }
+
+        .card.top {
+            border-top: 5px solid var(--wine)
+        }
+
+        .card.good {
+            background: #f2fff6;
+            border-color: #b7e1c3
+        }
+
+        .card.bad {
+            background: #fff0f1;
+            border-color: #f0bcc5
+        }
+
+        .big {
+            font-size: clamp(32px, 4.6vw, 64px);
+            font-weight: 800;
+            letter-spacing: -.04em
+        }
+
+        .mini {
+            font-size: 15px;
+            color: #79505d
+        }
+
+        .callout {
+            background: #fff9f2;
+            border-left: 6px solid var(--wine);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin: 24px 0
+        }
+
+        .callout p {
+            margin: 0
+        }
+
+        .diagram {
+            max-width: 1120px;
+            margin: 18px auto 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap
+        }
+
+        .dbtable {
+            min-width: 250px;
+            background: white;
+            border: 2px solid var(--wine);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 7px 20px #0001
+        }
+
+        .dbtitle {
+            background: var(--wine);
+            color: white;
+            padding: 9px 14px;
+            font-weight: 700
+        }
+
+        .dbrow {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 7px 14px;
+            border-top: 1px solid #eee;
+            color: #352128
+        }
+
+        .pk {
+            color: #27613b;
+            font-weight: 800
+        }
+
+        .fk {
+            color: #b25b18;
+            font-weight: 800
+        }
+
+        .arrow {
+            font-size: 44px;
+            color: var(--wine);
+            font-weight: 900
+        }
+
+        .syntax {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #efe5e5;
+            border-left: 5px solid var(--wine);
+            padding: 11px 15px;
+            border-radius: 8px;
+            margin: 14px 0 14px;
+            font-size: 16px
+        }
+
+        .syntax code {
+            font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+            color: #4b2833;
+            white-space: nowrap;
+            overflow: auto
+        }
+
+        .codewrap {
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px #0002
+        }
+
+        .run {
+            align-self: start;
+            margin: 15px 7px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid #666;
+            background: #303030;
+            color: #ddd;
+            cursor: pointer;
+            font-size: 15px
+        }
+
+        .run:hover {
+            background: #444
+        }
+
+        .editor {
+            position: relative;
+            min-height: 132px
+        }
+
+        .ceditor {
+            display: block;
+            width: 100%;
+            min-height: 132px;
+            margin: 0;
+            padding: 16px 18px;
+            border: 0;
+            outline: none;
+            background: #1e1e1e;
+            color: #fff;
+            font: 16px/1.55 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+            white-space: pre-wrap;
+            overflow-wrap: normal;
+            tab-size: 4;
+            caret-color: #fff
+        }
+
+        .ceditor:empty:before {
+            content: attr(data-placeholder);
+            color: #777
+        }
+
+        .ceditor.locked {
+            background: #1e1e1e;
+            color: #fff
+        }
+
+        .feedback {
+            max-width: 1100px;
+            margin: 10px auto 0;
+            font: 14px ui-monospace, monospace
+        }
+
+        .feedback.err {
+            color: #b4233d;
+            background: #fff0f1;
+            border: 1px solid #f0bcc5;
+            padding: 10px 12px;
+            border-radius: 8px
+        }
+
+        .feedback.ok {
+            color: #27613b
+        }
+
+        .output {
+            max-width: 1100px;
+            margin: 14px auto 0;
+            display: flex;
+            justify-content: center;
+            overflow: auto
+        }
+
+        .outbox {
+            background: white;
+            border: 1px solid #dbc9ce;
+            border-radius: 10px;
+            padding: 14px 18px;
+            color: #2a2023;
+            font: 14px/1.35 ui-monospace, monospace;
+            max-width: 100%;
+            overflow: auto
+        }
+
+        .outbox table {
+            font: 14px ui-monospace, monospace;
+            white-space: nowrap
+        }
+
+        .outbox th,
+        .outbox td {
+            padding: 6px 10px;
+            text-align: center
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: var(--paper);
+            font-size: 18px
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #ead9dd;
+            padding: 12px 14px;
+            text-align: left
+        }
+
+        th {
+            background: #f1e5e7;
+            color: var(--wine)
+        }
+
+        .slideNo {
+            position: fixed;
+            right: 2.2vw;
+            bottom: 2vh;
+            font-size: 13px;
+            color: #ad8893
+        }
+
+        .nav {
+            position: fixed;
+            left: 2vw;
+            bottom: 2vh;
+            z-index: 30;
+            display: flex;
+            gap: 8px
+        }
+
+        .nav button {
+            border: 1px solid #b98c99;
+            background: #fffaf4;
+            color: var(--wine);
+            border-radius: 8px;
+            padding: 7px 11px;
+            cursor: pointer
+        }
+
+        .progress {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            background: var(--wine);
+            z-index: 40;
+            transition: .2s
+        }
+
+        .note {
+            font-size: 14px;
+            color: #906b76
+        }
+
+        .desc {
+            margin: 0 0 12px;
+            color: #79505d;
+            font-size: 18px
+        }
+
+        @media(max-width:950px) {
+
+            .grid2,
+            .grid3,
+            .grid4 {
+                grid-template-columns: 1fr
+            }
+
+            .slide {
+                padding-left: 5vw;
+                padding-right: 5vw
+            }
+
+            .syntax {
+                align-items: flex-start;
+                flex-direction: column
+            }
+        }
+
+        /* Estrutura das tabelas e exemplos de criação. */
+        .table-scroll {
+            max-width: 1100px;
+            margin: 20px auto;
+            overflow-x: auto;
+            border: 1px solid #ead9dd;
+            border-radius: 12px
+        }
+
+        caption {
+            padding: 12px 14px;
+            text-align: left;
+            background: var(--wine);
+            color: white;
+            font-weight: 700
+        }
+
+        .table-scroll td:first-child {
+            font-family: ui-monospace, monospace
+        }
+
+        .table-scroll td,
+        .table-scroll th {
+            font-size: clamp(15px, 1.3vw, 20px)
+        }
+
+        .outbox .table-scroll {
+            margin: 0;
+            border: 0
+        }
+
+        .outbox .table-scroll td,
+        .outbox .table-scroll th {
+            font-size: 14px
+        }
+
+        .dbrow {
+            grid-template-columns: minmax(105px, 1fr) auto;
+            gap: 16px
+        }
+
+        .dbrow code {
+            font-size: 13px;
+            color: #79505d;
+            margin-right: 6px
+        }
+
+        .demo-note {
+            max-width: 1100px;
+            margin: 10px auto;
+            font-size: 13px;
+            color: #906b76
+        }
+
+        .expected-error {
+            background: #fff0f1;
+            border-color: #f0bcc5;
+            color: #b4233d
+        }
+
+        .note a {
+            color: var(--wine)
+        }
+
+        .slide {
+            padding-bottom: 80px
+        }
+
+        .ceditor[contenteditable="true"] {
+            min-height: 200px
+        }
+
+        .nav button:focus-visible,
+        .run:focus-visible {
+            outline: 3px solid var(--wine2);
+            outline-offset: 3px
+        }
+
+        @media(max-width:600px) {
+            h1 {
+                font-size: clamp(38px, 10vw, 54px)
+            }
+
+            h2 {
+                font-size: 30px
+            }
+
+            .topline {
+                font-size: 10px
+            }
+
+            .card {
+                padding: 20px
+            }
+
+            .ceditor {
+                font-size: 13px;
+                padding: 12px
+            }
+
+            .syntax code {
+                white-space: pre-wrap;
+                overflow-wrap: anywhere
+            }
+
+            .dbtable {
+                min-width: 0;
+                width: 100%
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="deck">
+        <section class="slide active">
+            <div class="topline"><span>Aula 2</span><span>PET Estatística UFSCar</span></div>
+            <span class="badge">SQLite + estrutura + dados</span>
+            <h1>Relacionamentos<br>entre tabelas</h1>
+            <div class="heroLine"></div>
+            <p class="subtitle">Tipos, estrutura, PK e FK: entender e criar antes de consultar.</p>
+            <div class="repo"><b>Arquivos</b><br><input value="minicurso_aula2.db + utils/gerar_dados.py"
+                    onclick="this.select()">
+                <div class="note">Inspeção do schema, criação de tabelas e consultas com JOIN.</div>
+            </div>
+            <div class="slideNo">1 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Objetivo da aula</span><span>PET Estatística UFSCar</span></div>
+            <h2>Da estrutura ao JOIN</h2>
+            <div class="grid3">
+                <div class="card top">
+                    <h3>1. Inspecionar</h3>
+                    <p>Ver tipos, regras e primeiras linhas das tabelas.</p>
+                </div>
+                <div class="card top">
+                    <h3>2. Construir</h3>
+                    <p>Criar PK, FK e PK composta; observar o que elas protegem.</p>
+                </div>
+                <div class="card top">
+                    <h3>3. Consultar</h3>
+                    <p>Entender 1:N e N:N para escrever INNER e LEFT JOIN.</p>
+                </div>
+            </div>
+            <div class="callout">
+                <p>Vamos criar as quatro tabelas com o mesmo cursor, importar os dados e usar os relacionamentos nas consultas.</p>
+            </div>
+            <div class="slideNo">2 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Ferramenta</span><span>PET Estatística UFSCar</span></div>
+            <h2>Por que SQLite nesta aula?</h2>
+            <div class="grid2">
+                <div class="card">
+                    <h3>PySpark</h3>
+                    <p>Ótimo para processar dados grandes e usar SQL sobre DataFrames.</p>
+                </div>
+                <div class="card">
+                    <h3>SQLite</h3>
+                    <p>Melhor para enxergar banco relacional: tabelas, chaves e relacionamentos.</p>
+                </div>
+            </div>
+            <div class="callout">
+                <p>A troca não é porque SQLite é “melhor”; é porque ele combina melhor com o objetivo desta aula.</p>
+            </div>
+            <div class="slideNo">3 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Banco relacional</span><span>PET Estatística UFSCar</span></div>
+            <h2>O banco que vamos montar</h2>
+            <div class="grid3">
+                <div class="card top">
+                    <h3>100 clientes</h3>
+                    <p>Várias cidades e alguns sem pedido.</p>
+                </div>
+                <div class="card top">
+                    <h3>250 pedidos</h3>
+                    <p>Cada pedido pertence a um cliente.</p>
+                </div>
+                <div class="card top">
+                    <h3>40 produtos</h3>
+                    <p>Alguns produtos nunca foram vendidos.</p>
+                </div>
+            </div>
+            <div class="callout">
+                <p>Primeiro criamos a estrutura. Depois importamos os dados do material da aula e partimos para as consultas.</p>
+            </div>
+            <div class="slideNo">4 / 37</div>
+        </section>
+<section class="slide interactive" data-action="connect">
+            <div class="topline"><span>SQL — Aula 2</span><span>PET Estatística UFSCar</span></div>
+            <h2>Começar com um banco vazio</h2>
+            <p class="desc">Uma conexão e um cursor para criar as tabelas, importar os dados e consultar.</p>
+            <div class="syntax"><b>Sintaxe</b><code>sqlite3.connect(":memory:")</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">import sqlite3
+
+conexao = sqlite3.connect(&quot;:memory:&quot;)
+cursor = conexao.cursor()
+cursor.execute(&quot;PRAGMA foreign_keys = ON&quot;)</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback"></div>
+            <div class="output"></div>
+            <div class="callout"><p>Execute a preparação uma vez. O banco em memória começa vazio e dura até fechar a conexão.</p></div><div class="slideNo">5 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Estrutura do banco</span><span>PET Estatística UFSCar</span></div>
+            <h2>Estrutura e dados são duas coisas</h2>
+            <div class="grid2">
+                <div class="card top">
+                    <h3>Estrutura (schema)</h3>
+                    <p>Nomes das colunas, tipos declarados e regras: PK, FK e campos obrigatórios.</p>
+                    <p><code>PRAGMA table_info(clientes)</code></p>
+                </div>
+                <div class="card top">
+                    <h3>Dados (linhas)</h3>
+                    <p>Os clientes, pedidos e produtos que foram cadastrados.</p>
+                    <p><code>SELECT * FROM clientes LIMIT 5</code></p>
+                </div>
+            </div>
+            <div class="callout">
+                <p>Uma tabela vazia já tem estrutura. <code>CREATE TABLE</code> define essa estrutura;
+                    <code>INSERT</code> adiciona linhas.</p>
+            </div>
+            <div class="slideNo">6 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Tipos de colunas</span><span>PET Estatística UFSCar</span></div>
+            <h2>Que tipo de valor vai em cada coluna?</h2>
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Tipo usado na aula</th>
+                            <th scope="col">Exemplos</th>
+                            <th scope="col">Colunas do banco</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>INTEGER</td>
+                            <td>1, 250, 4 → números inteiros</td>
+                            <td>IDs e quantidade</td>
+                        </tr>
+                        <tr>
+                            <td>TEXT</td>
+                            <td>&quot;Ana&quot;, &quot;São Carlos&quot;, &quot;2026-01-15&quot;</td>
+                            <td>nome, cidade, categoria, data_pedido</td>
+                        </tr>
+                        <tr>
+                            <td>REAL</td>
+                            <td>369.70 → número com parte decimal</td>
+                            <td>preco</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout">
+                <p>A data é guardada como <code>TEXT</code> no formato <code>AAAA-MM-DD</code>. O SQLite não tem um tipo
+                    exclusivo para datas.</p>
+            </div>
+            <p class="note">SQLite usa afinidade de tipos: em tabelas comuns, o tipo declarado orienta conversões; não é
+                uma validação rígida de todo valor. REAL usa ponto flutuante e pode ter aproximações.</p>
+            <p class="note">Referência: <a href="https://www.sqlite.org/datatype3.html" target="_blank"
+                    rel="noopener">Tipos no SQLite</a>.</p>
+            <div class="slideNo">7 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Tabela clientes</span><span>PET Estatística UFSCar</span></div>
+            <h2>Primeira entidade: clientes</h2>
+            <p class="desc">Uma linha por cliente. O ID identifica o cliente; nome e cidade são campos obrigatórios.</p>
+            <div class="table-scroll">
+                <table>
+                    <caption>Estrutura de clientes</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Coluna</th>
+                            <th scope="col">Tipo declarado</th>
+                            <th scope="col">Regra / papel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id_cliente</td>
+                            <td>INTEGER</td>
+                            <td>PRIMARY KEY</td>
+                        </tr>
+                        <tr>
+                            <td>nome</td>
+                            <td>TEXT</td>
+                            <td>NOT NULL</td>
+                        </tr>
+                        <tr>
+                            <td>cidade</td>
+                            <td>TEXT</td>
+                            <td>NOT NULL</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout">
+                <p>O <b>tipo</b> descreve o valor; PK, FK e NOT NULL são <b>restrições</b> da coluna ou da tabela.</p>
+            </div>
+            <div class="slideNo">8 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Chave primária</span><span>PET Estatística UFSCar</span></div>
+            <h2>O que é uma Primary Key?</h2>
+            <div class="grid2">
+                <div class="card top">
+                    <h3>Primary Key — PK</h3>
+                    <p>Identifica cada linha de forma única. Pode ser uma coluna ou uma combinação de colunas.</p>
+                </div>
+                <div class="card">
+                    <h3>No nosso banco</h3>
+                    <p><code>clientes.id_cliente</code> é <code>INTEGER PRIMARY KEY</code>.</p>
+                    <p>Duas pessoas podem ter o mesmo nome; seus IDs precisam ser diferentes.</p>
+                </div>
+            </div>
+            <div class="callout">
+                <p>PK é uma <b>regra de identificação</b>, não um tipo de dado. Aqui o tipo é <code>INTEGER</code> e a
+                    regra é <code>PRIMARY KEY</code>.</p>
+            </div>
+            <div class="slideNo">9 / 37</div>
+        </section>
+<section class="slide interactive" data-action="create_clientes">
+            <div class="topline"><span>SQL — estrutura e chaves</span><span>PET Estatística UFSCar</span></div>
+            <h2>Criar clientes com uma PK</h2>
+            <p class="desc">Primeiro criamos a tabela que será referenciada. NOT NULL exige um valor para nome e cidade.
+            </p>
+            <div class="syntax"><b>Sintaxe</b><code>coluna TIPO PRIMARY KEY | coluna TIPO NOT NULL</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+CREATE TABLE clientes (
+    id_cliente INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    cidade TEXT NOT NULL
+)
+&quot;&quot;&quot;)</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback" aria-live="polite"></div>
+            <div class="output"></div>
+            <div class="callout">
+                <p>A vírgula separa as definições; não coloque vírgula após a última. <code>CREATE TABLE</code> define a
+                    estrutura e não retorna linhas para <code>fetchall()</code>.</p>
+            </div>
+            <div class="slideNo">10 / 37</div>
+        </section>
+<section class="slide interactive" data-action="schema_clientes">
+            <div class="topline"><span>SQL — estrutura e chaves</span><span>PET Estatística UFSCar</span></div>
+            <h2>Como consultar a estrutura da tabela?</h2>
+            <p class="desc">PRAGMA table_info retorna uma linha por coluna, mesmo quando a tabela não tem dados.</p>
+            <div class="syntax"><b>Sintaxe</b><code>PRAGMA table_info(clientes);</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;PRAGMA table_info(clientes)&quot;)
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback" aria-live="polite"></div>
+            <div class="output"></div>
+            <div class="callout">
+                <p><code>name</code>: coluna; <code>type</code>: tipo; <code>notnull = 1</code>: NOT NULL explícito;
+                    <code>dflt_value</code>: padrão; <code>pk</code>: posição na PK (0 = fora da chave).
+                    <code>cid</code> é a posição da coluna. Em <code>INTEGER PRIMARY KEY</code>, <code>notnull</code>
+                    pode aparecer como 0: a PK continua identificando uma linha; omitir o ID gera um inteiro
+                    automaticamente.</p>
+            </div>
+            <div class="slideNo">11 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Chave estrangeira</span><span>PET Estatística UFSCar</span></div>
+            <h2>O que é uma Foreign Key?</h2>
+            <div class="grid2">
+                <div class="card top">
+                    <h3>Foreign Key — FK</h3>
+                    <p>Declara que um valor deve corresponder a uma chave da tabela referenciada.</p>
+                </div>
+                <div class="card">
+                    <h3>No nosso banco</h3>
+                    <p><code>pedidos.id_cliente</code> aponta para <code>clientes.id_cliente</code>.</p>
+                    <p>Vários pedidos podem usar o mesmo cliente: a FK pode se repetir.</p>
+                </div>
+            </div>
+            <div class="syntax"><b>Ligação</b><code>pedidos.id_cliente → clientes.id_cliente</code></div>
+            <div class="callout">
+                <p>O nome <code>id_cliente</code> sozinho não cria uma FK. Precisamos declarar
+                    <code>FOREIGN KEY (...) REFERENCES ...</code>. Com <code>NOT NULL</code>, cada pedido precisa
+                    informar um cliente.</p>
+            </div>
+            <p class="note">A chave referenciada pode ser PRIMARY KEY ou UNIQUE. <a
+                    href="https://www.sqlite.org/foreignkeys.html" target="_blank" rel="noopener">Referência: FKs no
+                    SQLite</a>.</p>
+            <div class="slideNo">12 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Tabela pedidos</span><span>PET Estatística UFSCar</span></div>
+            <h2>Segunda entidade: pedidos</h2>
+            <p class="desc">Uma linha por pedido. O cliente é indicado por uma chave estrangeira.</p>
+            <div class="table-scroll">
+                <table>
+                    <caption>Estrutura de pedidos</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Coluna</th>
+                            <th scope="col">Tipo declarado</th>
+                            <th scope="col">Regra / papel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id_pedido</td>
+                            <td>INTEGER</td>
+                            <td>PRIMARY KEY</td>
+                        </tr>
+                        <tr>
+                            <td>id_cliente</td>
+                            <td>INTEGER</td>
+                            <td>NOT NULL · FK → clientes(id_cliente)</td>
+                        </tr>
+                        <tr>
+                            <td>data_pedido</td>
+                            <td>TEXT</td>
+                            <td>NOT NULL · data em AAAA-MM-DD</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout">
+                <p>O <b>tipo</b> descreve o valor; PK, FK e NOT NULL são <b>restrições</b> da coluna ou da tabela.</p>
+            </div>
+            <div class="slideNo">13 / 37</div>
+        </section>
+<section class="slide interactive" data-action="create_pedidos">
+            <div class="topline"><span>SQL — estrutura e chaves</span><span>PET Estatística UFSCar</span></div>
+            <h2>Criar pedidos com PK e FK</h2>
+            <p class="desc">A PK identifica o pedido. A FK relaciona o pedido a um cliente existente.</p>
+            <div class="syntax">
+                <b>Sintaxe</b><code>FOREIGN KEY (coluna_local) REFERENCES tabela(coluna_referenciada)</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+CREATE TABLE pedidos (
+    id_pedido INTEGER PRIMARY KEY,
+    id_cliente INTEGER NOT NULL,
+    data_pedido TEXT NOT NULL,
+    FOREIGN KEY (id_cliente)
+        REFERENCES clientes(id_cliente)
+)
+&quot;&quot;&quot;)</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback" aria-live="polite"></div>
+            <div class="output"></div>
+            <div class="callout">
+                <p><code>id_pedido</code>: INTEGER + PK. <code>id_cliente</code>: INTEGER + NOT NULL + FK. A declaração
+                    de FK usa a coluna local e a chave da outra tabela.</p>
+            </div>
+            <div class="slideNo">14 / 37</div>
+        </section>
+<section class="slide interactive" data-action="schema_fk">
+            <div class="topline"><span>SQL — estrutura e chaves</span><span>PET Estatística UFSCar</span></div>
+            <h2>Como conferir se a FK foi criada?</h2>
+            <p class="desc">table_info mostra tipos e PK; foreign_key_list mostra os relacionamentos declarados.</p>
+            <div class="syntax"><b>Sintaxe</b><code>PRAGMA foreign_key_list(pedidos);</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;PRAGMA foreign_key_list(pedidos)&quot;)
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback" aria-live="polite"></div>
+            <div class="output"></div>
+            <div class="callout">
+                <p>Leia <code>from = id_cliente</code> como a coluna de pedidos; <code>table = clientes</code> e
+                    <code>to = id_cliente</code> indicam o destino. Isso consulta a estrutura, sem executar um JOIN.</p>
+            </div>
+            <div class="slideNo">15 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>1 : N</span><span>PET Estatística UFSCar</span></div>
+            <h2>Cliente → Pedido é 1:N</h2>
+            <div class="diagram">
+                <div class="dbtable">
+                    <div class="dbtitle">clientes</div>
+                    <div class="dbrow"><span>id_cliente</span><span class="pk"><code>INTEGER</code> PK</span></div>
+                    <div class="dbrow"><span>nome</span><span class="">TEXT</span></div>
+                </div>
+                <div class="arrow">1 → N</div>
+                <div class="dbtable">
+                    <div class="dbtitle">pedidos</div>
+                    <div class="dbrow"><span>id_pedido</span><span class="pk"><code>INTEGER</code> PK</span></div>
+                    <div class="dbrow"><span>id_cliente</span><span class="fk"><code>INTEGER</code> FK</span></div>
+                </div>
+            </div>
+            <div class="callout">
+                <p>Um cliente pode ter vários pedidos. Mas cada pedido pertence a um cliente.</p>
+            </div>
+            <div class="slideNo">16 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Tabela produtos</span><span>PET Estatística UFSCar</span></div>
+            <h2>Terceira entidade: produtos</h2>
+            <p class="desc">Produtos têm identificação própria e podem existir sem aparecer em pedidos.</p>
+            <div class="table-scroll">
+                <table>
+                    <caption>Estrutura de produtos</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Coluna</th>
+                            <th scope="col">Tipo declarado</th>
+                            <th scope="col">Regra / papel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id_produto</td>
+                            <td>INTEGER</td>
+                            <td>PRIMARY KEY</td>
+                        </tr>
+                        <tr>
+                            <td>nome</td>
+                            <td>TEXT</td>
+                            <td>NOT NULL</td>
+                        </tr>
+                        <tr>
+                            <td>categoria</td>
+                            <td>TEXT</td>
+                            <td>NOT NULL</td>
+                        </tr>
+                        <tr>
+                            <td>preco</td>
+                            <td>REAL</td>
+                            <td>NOT NULL</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout">
+                <p>O <b>tipo</b> descreve o valor; PK, FK e NOT NULL são <b>restrições</b> da coluna ou da tabela.</p>
+            </div>
+            <div class="slideNo">17 / 37</div>
+        </section>
+<section class="slide interactive" data-action="create_produtos">
+            <div class="topline"><span>SQL — estrutura e chaves</span><span>PET Estatística UFSCar</span></div>
+            <h2>Criar produtos e declarar seus tipos</h2>
+            <p class="desc">Produtos têm uma PK própria. preco usa REAL; nome e categoria usam TEXT.</p>
+            <div class="syntax"><b>Sintaxe</b><code>preco REAL NOT NULL</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+CREATE TABLE produtos (
+    id_produto INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    categoria TEXT NOT NULL,
+    preco REAL NOT NULL
+)
+&quot;&quot;&quot;)</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback" aria-live="polite"></div>
+            <div class="output"></div>
+            <div class="callout">
+                <p>Esta é a mesma estrutura do banco da aula. Produto existe sem depender de um pedido.</p>
+            </div>
+            <div class="slideNo">18 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>N : N</span><span>PET Estatística UFSCar</span></div>
+            <h2>Pedido ↔ Produto é N:N</h2>
+            <div class="grid2">
+                <div class="card">
+                    <h3>Um pedido</h3>
+                    <p>Pode conter vários produtos.</p>
+                </div>
+                <div class="card">
+                    <h3>Um produto</h3>
+                    <p>Pode aparecer em vários pedidos.</p>
+                </div>
+            </div>
+            <div class="callout">
+                <p>Por isso não colocamos uma lista de produtos dentro de <code>pedidos</code>. Criamos uma tabela
+                    associativa.</p>
+            </div>
+            <div class="slideNo">19 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Tabela associativa</span><span>PET Estatística UFSCar</span></div>
+            <h2>itens_pedido resolve o N:N</h2>
+            <div class="diagram">
+                <div class="dbtable">
+                    <div class="dbtitle">pedidos</div>
+                    <div class="dbrow"><span>id_pedido</span><span class="pk"><code>INTEGER</code> PK</span></div>
+                </div>
+                <div class="arrow">1 → N</div>
+                <div class="dbtable">
+                    <div class="dbtitle">itens_pedido</div>
+                    <div class="dbrow"><span>id_pedido</span><span><code>INTEGER</code> <b class="pk">PK</b> + <b
+                                class="fk">FK</b></span></div>
+                    <div class="dbrow"><span>id_produto</span><span><code>INTEGER</code> <b class="pk">PK</b> + <b
+                                class="fk">FK</b></span></div>
+                    <div class="dbrow"><span>quantidade</span><span class="">INTEGER · DEFAULT 1</span></div>
+                </div>
+                <div class="arrow">N ← 1</div>
+                <div class="dbtable">
+                    <div class="dbtitle">produtos</div>
+                    <div class="dbrow"><span>id_produto</span><span class="pk"><code>INTEGER</code> PK</span></div>
+                    <div class="dbrow"><span>nome</span><span class="">TEXT</span></div>
+                </div>
+            </div>
+            <div class="callout">
+                <p>Cada linha representa um produto dentro de um pedido. <b>PK composta:</b> (id_pedido, id_produto).
+                    Essas duas colunas também são FKs.</p>
+            </div>
+            <div class="slideNo">20 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Chave primária composta</span><span>PET Estatística UFSCar</span></div>
+            <h2>Duas colunas formam uma única PK</h2>
+            <div class="table-scroll">
+                <table>
+                    <caption>Exemplo conceitual: supondo pedidos e produtos já cadastrados</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">id_pedido</th>
+                            <th scope="col">id_produto</th>
+                            <th scope="col">quantidade</th>
+                            <th scope="col">Pode inserir?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>101</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>Sim: primeiro par (101, 6)</td>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>19</td>
+                            <td>1</td>
+                            <td>Sim: outro produto no mesmo pedido</td>
+                        </tr>
+                        <tr>
+                            <td>102</td>
+                            <td>6</td>
+                            <td>3</td>
+                            <td>Sim: mesmo produto em outro pedido</td>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>Não: o par (101, 6) se repetiu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout">
+                <p><code>PRIMARY KEY (id_pedido, id_produto)</code> torna o <b>par</b> único. Cada coluna também é uma
+                    FK. Para alterar a quantidade do mesmo produto no pedido, usamos <code>UPDATE</code>.</p>
+            </div>
+            <div class="slideNo">21 / 37</div>
+        </section>
+<section class="slide interactive" data-action="create_itens">
+            <div class="topline"><span>SQL — estrutura e chaves</span><span>PET Estatística UFSCar</span></div>
+            <h2>Criar a tabela que resolve o N:N</h2>
+            <p class="desc">Crie após pedidos e produtos. A tabela tem uma PK composta, duas FKs e quantidade com valor padrão 1.</p>
+            <div class="syntax"><b>Sintaxe</b><code>PRIMARY KEY (...) + FOREIGN KEY (...) + DEFAULT 1</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+CREATE TABLE itens_pedido (
+    id_pedido INTEGER NOT NULL,
+    id_produto INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL DEFAULT 1,
+    PRIMARY KEY (id_pedido, id_produto),
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
+    FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+)
+&quot;&quot;&quot;)</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback" aria-live="polite"></div>
+            <div class="output"></div>
+            <div class="callout"><p><code>quantidade INTEGER NOT NULL DEFAULT 1</code>: se quantidade for omitida no INSERT, o banco usa <b>1</b>. NOT NULL exige um valor; DEFAULT define o valor usado na omissão.</p></div><p class="note">DEFAULT 1 não exige quantidade positiva. Para essa regra, usamos <code>CHECK (quantidade &gt; 0)</code>.</p>
+            <div class="slideNo">22 / 37</div>
+        </section>
+<section class="slide interactive" data-action="schema_itens">
+            <div class="topline"><span>SQL — estrutura e chaves</span><span>PET Estatística UFSCar</span></div>
+            <h2>Enxergar a PK composta na estrutura</h2>
+            <p class="desc">Agora consultamos a estrutura da tabela associativa que acabamos de criar.</p>
+            <div class="syntax"><b>Sintaxe</b><code>PRAGMA table_info(itens_pedido);</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;PRAGMA table_info(itens_pedido)&quot;)
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback" aria-live="polite"></div>
+            <div class="output"></div>
+            <div class="callout"><p><code>pk = 1</code> e <code>pk = 2</code> indicam as posições na mesma PK. Na linha de <code>quantidade</code>, <code>dflt_value = 1</code> mostra o padrão declarado em DEFAULT.</p></div>
+            <div class="slideNo">23 / 37</div>
+        </section>
+<section class="slide interactive" data-action="prepare_data">
+<div class="topline"><span>Importar os dados</span><span>PET Estatística UFSCar</span></div>
+<h2>As tabelas estão prontas. E os dados?</h2><p class="desc">Agora vamos importar os dados. O material da aula já fornece as funções que montam as listas de registros.</p>
+<div class="syntax"><b>Sintaxe</b><code>Preparar clientes, produtos, pedidos e itens</code></div>
+<div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button><div class="editor"><div class="ceditor locked" contenteditable="false" spellcheck="false" data-placeholder="Digite o código aqui...">import random
+from utils import gerar_dados
+
+random.seed(42)
+clientes = gerar_dados.gerar_clientes()
+produtos = gerar_dados.gerar_produtos()
+pedidos = gerar_dados.gerar_pedidos()
+itens = gerar_dados.gerar_itens_pedido()</div></div></div>
+<p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para rodar no SQLite.</p>
+<div class="feedback" aria-live="polite"></div><div class="output"></div>
+<div class="callout"><p>No notebook, trabalhe na pasta <code>Aula 2 - Intermediário</code>, onde está <code>utils/gerar_dados.py</code>. A semente 42 reproduz os dados da aula. Por enquanto, as listas estão no Python; as tabelas ainda estão vazias.</p></div><div class="slideNo">24 / 37</div></section>
+<section class="slide interactive" data-action="import_data">
+<div class="topline"><span>Importar os dados</span><span>PET Estatística UFSCar</span></div>
+<h2>Importar os dados para as quatro tabelas</h2><p class="desc">Usamos o mesmo cursor. Primeiro clientes e produtos; depois pedidos e itens_pedido.</p>
+<div class="syntax"><b>Sintaxe</b><code>cursor.executemany(&quot;INSERT INTO tabela VALUES (?, ...)&quot;, dados)</code></div>
+<div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button><div class="editor"><div class="ceditor locked" contenteditable="false" spellcheck="false" data-placeholder="Digite o código aqui...">cursor.executemany(
+    &quot;INSERT INTO clientes VALUES (?, ?, ?)&quot;, clientes)
+cursor.executemany(
+    &quot;INSERT INTO produtos VALUES (?, ?, ?, ?)&quot;, produtos)
+cursor.executemany(
+    &quot;INSERT INTO pedidos VALUES (?, ?, ?)&quot;, pedidos)
+cursor.executemany(
+    &quot;INSERT INTO itens_pedido VALUES (?, ?, ?)&quot;, itens)
+conexao.commit()</div></div></div>
+<p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para rodar no SQLite.</p>
+<div class="feedback" aria-live="polite"></div><div class="output"></div>
+<div class="callout"><p><code>executemany()</code> insere várias linhas. Cada <code>?</code> recebe um valor da lista. A ordem respeita as FKs; <code>commit()</code> confirma as inserções. Execute a importação uma vez.</p></div><div class="slideNo">25 / 37</div></section>
+<section class="slide interactive" data-action="default_quantidade">
+<div class="topline"><span>Valor padrão</span><span>PET Estatística UFSCar</span></div>
+<h2>DEFAULT 1: omitir a quantidade</h2>
+<p class="desc">Após importar os dados, inserimos o produto 1 no pedido 1. O INSERT informa só as duas FKs.</p>
+<div class="syntax"><b>Sintaxe</b><code>coluna TIPO NOT NULL DEFAULT valor</code></div>
+<div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button><div class="editor"><div class="ceditor locked" contenteditable="false" spellcheck="false" data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+INSERT INTO itens_pedido (id_pedido, id_produto)
+VALUES (1, 1)
+&quot;&quot;&quot;)
+
+cursor.execute(&quot;&quot;&quot;
+SELECT * FROM itens_pedido
+WHERE id_pedido = 1 AND id_produto = 1
+&quot;&quot;&quot;)
+cursor.fetchall()</div></div></div>
+<p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para rodar no SQLite.</p>
+<div class="feedback" aria-live="polite"></div><div class="output"></div>
+<div class="callout"><p>A quantidade ficou <b>1</b> porque foi omitida. Se informar <code>quantidade = 3</code>, o banco guarda 3. Informar <code>NULL</code> não usa o padrão: NOT NULL rejeita esse valor.</p></div>
+<div class="slideNo">26 / 37</div></section>
+<section class="slide interactive" data-action="show_clientes">
+            <div class="topline"><span>SQL — Aula 2</span><span>PET Estatística UFSCar</span></div>
+            <h2>Mostrar clientes</h2>
+            <p class="desc">Com os dados importados, vamos ver os primeiros clientes.</p>
+            <div class="syntax"><b>Sintaxe</b><code>SELECT * FROM clientes LIMIT 5</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+SELECT *
+FROM clientes
+LIMIT 5
+&quot;&quot;&quot;)
+
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback"></div>
+            <div class="output"></div>
+            <div class="slideNo">27 / 37</div>
+        </section>
+<section class="slide interactive" data-action="show_pedidos">
+            <div class="topline"><span>SQL — Aula 2</span><span>PET Estatística UFSCar</span></div>
+            <h2>Mostrar pedidos</h2>
+            <p class="desc">Observe id_cliente: a FK informa quem fez cada pedido.</p>
+            <div class="syntax"><b>Sintaxe</b><code>SELECT * FROM pedidos LIMIT 5</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+SELECT *
+FROM pedidos
+LIMIT 5
+&quot;&quot;&quot;)
+
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback"></div>
+            <div class="output"></div>
+            <div class="slideNo">28 / 37</div>
+        </section>
+<section class="slide interactive" data-action="show_produtos">
+            <div class="topline"><span>SQL — Aula 2</span><span>PET Estatística UFSCar</span></div>
+            <h2>Mostrar produtos</h2>
+            <p class="desc">Veja os produtos cadastrados e os valores das colunas TEXT e REAL.</p>
+            <div class="syntax"><b>Sintaxe</b><code>SELECT * FROM produtos LIMIT 5</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+SELECT *
+FROM produtos
+LIMIT 5
+&quot;&quot;&quot;)
+
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback"></div>
+            <div class="output"></div>
+            <div class="slideNo">29 / 37</div>
+        </section>
+<section class="slide interactive" data-action="show_itens">
+            <div class="topline"><span>SQL — Aula 2</span><span>PET Estatística UFSCar</span></div>
+            <h2>Mostrar itens_pedido</h2>
+            <p class="desc">Um pedido aparece em várias linhas, uma para cada produto.</p>
+            <div class="syntax"><b>Sintaxe</b><code>SELECT * FROM itens_pedido LIMIT 10</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+SELECT *
+FROM itens_pedido
+LIMIT 10
+&quot;&quot;&quot;)
+
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback"></div>
+            <div class="output"></div>
+            <div class="slideNo">30 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>JOIN</span><span>PET Estatística UFSCar</span></div>
+            <h2>O que o JOIN faz?</h2>
+            <div class="grid2">
+                <div class="card">
+                    <h3>Antes</h3>
+                    <p>Nome do cliente está em <code>clientes</code>; número do pedido está em <code>pedidos</code>.</p>
+                </div>
+                <div class="card">
+                    <h3>Depois</h3>
+                    <p>O JOIN reconstrói a informação usando a chave em comum.</p>
+                </div>
+            </div>
+            <div class="syntax"><b>Ideia geral</b><code>clientes.id_cliente = pedidos.id_cliente</code></div>
+            <div class="slideNo">31 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Tipos de JOIN</span><span>PET Estatística UFSCar</span></div>
+            <h2>INNER vs LEFT</h2>
+            <div class="grid2">
+                <div class="card top">
+                    <h3>INNER JOIN</h3>
+                    <p>Mostra apenas clientes que têm pedido.</p>
+                </div>
+                <div class="card top">
+                    <h3>LEFT JOIN</h3>
+                    <p>Mostra todos os clientes, inclusive sem pedido.</p>
+                </div>
+            </div>
+            <div class="callout">
+                <p>Essa diferença só fica clara porque a base tem clientes sem pedido de propósito.</p>
+            </div>
+            <div class="slideNo">32 / 37</div>
+        </section>
+<section class="slide interactive" data-action="inner">
+            <div class="topline"><span>SQL — Aula 2</span><span>PET Estatística UFSCar</span></div>
+            <h2>INNER JOIN na prática</h2>
+            <p class="desc">Agora o código confirma a ideia: ficam só os clientes com pedidos.</p>
+            <div class="syntax"><b>Sintaxe</b><code>A JOIN B ON A.chave = B.chave</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+SELECT
+clientes.nome,
+pedidos.id_pedido
+FROM clientes
+JOIN pedidos
+ON clientes.id_cliente = pedidos.id_cliente
+LIMIT 10
+&quot;&quot;&quot;)
+
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback"></div>
+            <div class="output"></div>
+            <div class="slideNo">33 / 37</div>
+        </section>
+<section class="slide interactive" data-action="left">
+            <div class="topline"><span>SQL — Aula 2</span><span>PET Estatística UFSCar</span></div>
+            <h2>LEFT JOIN na prática</h2>
+            <p class="desc">Usamos LEFT JOIN para encontrar clientes sem pedido.</p>
+            <div class="syntax"><b>Sintaxe</b><code>A LEFT JOIN B ON A.chave = B.chave</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+SELECT
+clientes.nome,
+pedidos.id_pedido
+FROM clientes
+LEFT JOIN pedidos
+ON clientes.id_cliente = pedidos.id_cliente
+WHERE pedidos.id_pedido IS NULL
+LIMIT 10
+&quot;&quot;&quot;)
+
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback"></div>
+            <div class="output"></div>
+            <div class="slideNo">34 / 37</div>
+        </section>
+<section class="slide interactive" data-action="chain">
+            <div class="topline"><span>SQL — Aula 2</span><span>PET Estatística UFSCar</span></div>
+            <h2>JOIN em cadeia</h2>
+            <p class="desc">Só no final mostramos uma consulta maior, quando o schema já faz sentido.</p>
+            <div class="syntax"><b>Sintaxe</b><code>cliente → pedido → item → produto</code></div>
+            <div class="codewrap"><button class="run" aria-label="Conferir exemplo e mostrar saída prevista">▶</button>
+                <div class="editor">
+                    <div class="ceditor locked" contenteditable="false" spellcheck="false"
+                        data-placeholder="Digite o código aqui...">cursor.execute(&quot;&quot;&quot;
+SELECT
+clientes.nome AS cliente,
+pedidos.id_pedido,
+produtos.nome AS produto,
+itens_pedido.quantidade
+FROM clientes
+JOIN pedidos
+ON clientes.id_cliente = pedidos.id_cliente
+JOIN itens_pedido
+ON pedidos.id_pedido = itens_pedido.id_pedido
+JOIN produtos
+ON itens_pedido.id_produto = produtos.id_produto
+LIMIT 10
+&quot;&quot;&quot;)
+
+cursor.fetchall()</div>
+                </div>
+            </div>
+            <p class="demo-note">▶ confere o exemplo e mostra uma saída prevista. Execute o Python no notebook para
+                rodar no SQLite.</p>
+            <div class="feedback"></div>
+            <div class="output"></div>
+            <div class="slideNo">35 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Notebook</span><span>PET Estatística UFSCar</span></div>
+            <h2>O que fica para os exercícios?</h2>
+            <div class="grid2">
+                <div class="card">
+                    <h3>Consultas básicas</h3>
+                    <p>SELECT, WHERE, ORDER BY, GROUP BY.</p>
+                </div>
+                <div class="card">
+                    <h3>JOINs</h3>
+                    <p>INNER, LEFT e consultas com várias tabelas.</p>
+                </div>
+                <div class="card">
+                    <h3>Ausências</h3>
+                    <p>Clientes sem pedido, produtos sem venda.</p>
+                </div>
+                <div class="card">
+                    <h3>Agregações</h3>
+                    <p>Faturamento por produto, categoria, cidade e cliente.</p>
+                </div>
+            </div>
+            <div class="slideNo">36 / 37</div>
+        </section>
+<section class="slide">
+            <div class="topline"><span>Fechamento</span><span>PET Estatística UFSCar</span></div>
+            <h1>Olhar primeiro.<br>Consultar depois.</h1>
+            <div class="heroLine"></div>
+            <p class="subtitle">A gente lê a estrutura, cria as chaves, entende as relações e escreve JOIN.</p>
+            <div class="slideNo">37 / 37</div>
+        </section>
+    </div>
+    <div class="nav"><button id="prev" aria-label="Slide anterior">←</button><button id="next"
+            aria-label="Próximo slide">→</button></div>
+    <div class="progress"></div>
+    <script>
+        const slides = [...document.querySelectorAll('.slide')]; let current = 0;
+        function show(i) { current = Math.max(0, Math.min(slides.length - 1, i)); slides.forEach((s, j) => s.classList.toggle('active', j === current)); document.querySelector('.progress').style.width = ((current + 1) / slides.length * 100) + '%'; }
+        document.getElementById('prev').onclick = () => show(current - 1); document.getElementById('next').onclick = () => show(current + 1);
+        document.addEventListener('keydown', e => { let ed = document.activeElement && document.activeElement.classList && document.activeElement.classList.contains('ceditor'); if (ed || /^(INPUT|TEXTAREA|BUTTON|SELECT|A)$/.test(document.activeElement?.tagName || '')) return; if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(current + 1); } if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(current - 1); } });
+        const required = {"show_clientes": ["select*", "fromclientes", "limit5", "fetchall()"], "show_pedidos": ["select*", "frompedidos", "limit5", "fetchall()"], "inner": ["clientes.nome", "pedidos.id_pedido", "fromclientes", "joinpedidos", "onclientes.id_cliente=pedidos.id_cliente", "limit10", "fetchall()"], "left": ["clientes.nome", "pedidos.id_pedido", "fromclientes", "leftjoinpedidos", "onclientes.id_cliente=pedidos.id_cliente", "wherepedidos.id_pedidoisnull", "limit10", "fetchall()"], "show_produtos": ["select*", "fromprodutos", "limit5", "fetchall()"], "show_itens": ["select*", "fromitens_pedido", "limit10", "fetchall()"], "chain": ["clientes.nomeascliente", "pedidos.id_pedido", "produtos.nomeasproduto", "itens_pedido.quantidade", "joinpedidos", "joinitens_pedido", "joinprodutos", "limit10"]};
+        const outputs = {"connect": "<div class=\"outbox\">Banco vazio em memória. Vamos criar as quatro tabelas com este cursor.</div>", "show_clientes": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">id_cliente</th><th scope=\"col\">nome</th><th scope=\"col\">cidade</th></tr></thead><tbody><tr><td>1</td><td>Eduarda Ribeiro</td><td>Piracicaba</td></tr><tr><td>2</td><td>Henrique Mendes</td><td>Rio Claro</td></tr><tr><td>3</td><td>Yasmin Nascimento</td><td>Rio Claro</td></tr><tr><td>4</td><td>Yasmin Pereira</td><td>Limeira</td></tr><tr><td>5</td><td>Paula Santos</td><td>Sorocaba</td></tr></tbody></table></div>", "show_pedidos": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">id_pedido</th><th scope=\"col\">id_cliente</th><th scope=\"col\">data_pedido</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>2026-01-15</td></tr><tr><td>2</td><td>2</td><td>2026-09-11</td></tr><tr><td>3</td><td>3</td><td>2026-06-16</td></tr><tr><td>4</td><td>4</td><td>2026-04-04</td></tr><tr><td>5</td><td>5</td><td>2026-09-07</td></tr></tbody></table></div>", "inner": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">nome</th><th scope=\"col\">id_pedido</th></tr></thead><tbody><tr><td>Eduarda Ribeiro</td><td>1</td></tr><tr><td>Henrique Mendes</td><td>2</td></tr><tr><td>Yasmin Nascimento</td><td>3</td></tr><tr><td>Yasmin Pereira</td><td>4</td></tr><tr><td>Paula Santos</td><td>5</td></tr><tr><td>Beatriz Costa</td><td>6</td></tr><tr><td>Gabriel Araújo</td><td>7</td></tr><tr><td>Kaique Carvalho</td><td>8</td></tr><tr><td>Beatriz Ribeiro</td><td>9</td></tr><tr><td>Paula Martins</td><td>10</td></tr></tbody></table></div>", "left": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">nome</th><th scope=\"col\">id_pedido</th></tr></thead><tbody><tr><td>Otavio Martins</td><td>NULL</td></tr><tr><td>Paula Carvalho</td><td>NULL</td></tr><tr><td>Yasmin Silva</td><td>NULL</td></tr><tr><td>Diego Rodrigues</td><td>NULL</td></tr><tr><td>Beatriz Mendes</td><td>NULL</td></tr><tr><td>Beatriz Silva</td><td>NULL</td></tr><tr><td>Julia Monteiro</td><td>NULL</td></tr><tr><td>Eduarda Fernandes</td><td>NULL</td></tr><tr><td>Igor Fernandes</td><td>NULL</td></tr><tr><td>Caio Carvalho</td><td>NULL</td></tr></tbody></table></div>", "show_produtos": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">id_produto</th><th scope=\"col\">nome</th><th scope=\"col\">categoria</th><th scope=\"col\">preco</th></tr></thead><tbody><tr><td>1</td><td>Desktop</td><td>Computadores</td><td>369.7</td></tr><tr><td>2</td><td>Mochila para Notebook</td><td>Acessórios</td><td>3117.05</td></tr><tr><td>3</td><td>Roteador</td><td>Rede</td><td>2833.77</td></tr><tr><td>4</td><td>Carregador</td><td>Acessórios</td><td>485.5</td></tr><tr><td>5</td><td>SSD 500GB</td><td>Armazenamento</td><td>3482.99</td></tr></tbody></table></div>", "show_itens": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">id_pedido</th><th scope=\"col\">id_produto</th><th scope=\"col\">quantidade</th></tr></thead><tbody><tr><td>1</td><td>6</td><td>4</td></tr><tr><td>1</td><td>19</td><td>2</td></tr><tr><td>1</td><td>21</td><td>2</td></tr><tr><td>2</td><td>35</td><td>3</td></tr><tr><td>2</td><td>24</td><td>2</td></tr><tr><td>2</td><td>34</td><td>3</td></tr><tr><td>3</td><td>19</td><td>2</td></tr><tr><td>3</td><td>22</td><td>2</td></tr><tr><td>3</td><td>8</td><td>4</td></tr><tr><td>3</td><td>30</td><td>3</td></tr></tbody></table></div>", "chain": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">cliente</th><th scope=\"col\">id_pedido</th><th scope=\"col\">produto</th><th scope=\"col\">quantidade</th></tr></thead><tbody><tr><td>Eduarda Ribeiro</td><td>1</td><td>Suporte para Notebook</td><td>4</td></tr><tr><td>Eduarda Ribeiro</td><td>1</td><td>Notebook</td><td>2</td></tr><tr><td>Eduarda Ribeiro</td><td>1</td><td>Controle</td><td>2</td></tr><tr><td>Henrique Mendes</td><td>2</td><td>Webcam</td><td>3</td></tr><tr><td>Henrique Mendes</td><td>2</td><td>Adaptador USB-C</td><td>2</td></tr><tr><td>Henrique Mendes</td><td>2</td><td>Mouse</td><td>3</td></tr><tr><td>Yasmin Nascimento</td><td>3</td><td>Notebook</td><td>2</td></tr><tr><td>Yasmin Nascimento</td><td>3</td><td>Cabo HDMI</td><td>2</td></tr><tr><td>Yasmin Nascimento</td><td>3</td><td>Suporte para Monitor</td><td>4</td></tr><tr><td>Yasmin Nascimento</td><td>3</td><td>Teclado</td><td>3</td></tr></tbody></table></div>", "schema_clientes": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">cid</th><th scope=\"col\">name</th><th scope=\"col\">type</th><th scope=\"col\">notnull</th><th scope=\"col\">dflt_value</th><th scope=\"col\">pk</th></tr></thead><tbody><tr><td>0</td><td>id_cliente</td><td>INTEGER</td><td>0</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>nome</td><td>TEXT</td><td>1</td><td>NULL</td><td>0</td></tr><tr><td>2</td><td>cidade</td><td>TEXT</td><td>1</td><td>NULL</td><td>0</td></tr></tbody></table></div>", "create_clientes": "<div class=\"outbox\">Tabela clientes criada: id_cliente INTEGER (PK), nome TEXT e cidade TEXT (NOT NULL). Ainda não há linhas.</div>", "create_pedidos": "<div class=\"outbox\">Tabela pedidos criada. FK: pedidos.id_cliente → clientes.id_cliente.</div>", "schema_fk": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">id</th><th scope=\"col\">seq</th><th scope=\"col\">table</th><th scope=\"col\">from</th><th scope=\"col\">to</th><th scope=\"col\">on_update</th><th scope=\"col\">on_delete</th><th scope=\"col\">match</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>clientes</td><td>id_cliente</td><td>id_cliente</td><td>NO ACTION</td><td>NO ACTION</td><td>NONE</td></tr></tbody></table></div>", "create_produtos": "<div class=\"outbox\">Tabela produtos criada com quatro colunas e PK em id_produto.</div>", "create_itens": "<div class=\"outbox\">itens_pedido criada. PK: (id_pedido, id_produto). Duas FKs. quantidade: INTEGER NOT NULL DEFAULT 1.</div>", "schema_itens": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">cid</th><th scope=\"col\">name</th><th scope=\"col\">type</th><th scope=\"col\">notnull</th><th scope=\"col\">dflt_value</th><th scope=\"col\">pk</th></tr></thead><tbody><tr><td>0</td><td>id_pedido</td><td>INTEGER</td><td>1</td><td>NULL</td><td>1</td></tr><tr><td>1</td><td>id_produto</td><td>INTEGER</td><td>1</td><td>NULL</td><td>2</td></tr><tr><td>2</td><td>quantidade</td><td>INTEGER</td><td>1</td><td>1</td><td>0</td></tr></tbody></table></div>", "prepare_data": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">Dados preparados</th><th scope=\"col\">Quantidade</th></tr></thead><tbody><tr><td>clientes</td><td>100</td></tr><tr><td>produtos</td><td>40</td></tr><tr><td>pedidos</td><td>250</td></tr><tr><td>itens_pedido</td><td>864</td></tr></tbody></table></div>", "import_data": "<div class=\"outbox\">Dados importados e commit confirmado. Agora podemos fazer SELECT e JOIN nas quatro tabelas.</div>", "default_quantidade": "<div class=\"outbox\"><table><thead><tr><th scope=\"col\">id_pedido</th><th scope=\"col\">id_produto</th><th scope=\"col\">quantidade</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>1</td></tr></tbody></table></div>"};
+
+        const schemaExamples = {"schema_clientes": "cursor.execute(\"PRAGMA table_info(clientes)\")\ncursor.fetchall()", "create_clientes": "cursor.execute(\"\"\"\nCREATE TABLE clientes (\n    id_cliente INTEGER PRIMARY KEY,\n    nome TEXT NOT NULL,\n    cidade TEXT NOT NULL\n)\n\"\"\")", "create_pedidos": "cursor.execute(\"\"\"\nCREATE TABLE pedidos (\n    id_pedido INTEGER PRIMARY KEY,\n    id_cliente INTEGER NOT NULL,\n    data_pedido TEXT NOT NULL,\n    FOREIGN KEY (id_cliente)\n        REFERENCES clientes(id_cliente)\n)\n\"\"\")", "schema_fk": "cursor.execute(\"PRAGMA foreign_key_list(pedidos)\")\ncursor.fetchall()", "create_produtos": "cursor.execute(\"\"\"\nCREATE TABLE produtos (\n    id_produto INTEGER PRIMARY KEY,\n    nome TEXT NOT NULL,\n    categoria TEXT NOT NULL,\n    preco REAL NOT NULL\n)\n\"\"\")", "create_itens": "cursor.execute(\"\"\"\nCREATE TABLE itens_pedido (\n    id_pedido INTEGER NOT NULL,\n    id_produto INTEGER NOT NULL,\n    quantidade INTEGER NOT NULL DEFAULT 1,\n    PRIMARY KEY (id_pedido, id_produto),\n    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),\n    FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)\n)\n\"\"\")", "schema_itens": "cursor.execute(\"PRAGMA table_info(itens_pedido)\")\ncursor.fetchall()", "connect": "import sqlite3\n\nconexao = sqlite3.connect(\":memory:\")\ncursor = conexao.cursor()\ncursor.execute(\"PRAGMA foreign_keys = ON\")", "prepare_data": "import random\nfrom utils import gerar_dados\n\nrandom.seed(42)\nclientes = gerar_dados.gerar_clientes()\nprodutos = gerar_dados.gerar_produtos()\npedidos = gerar_dados.gerar_pedidos()\nitens = gerar_dados.gerar_itens_pedido()", "import_data": "cursor.executemany(\n    \"INSERT INTO clientes VALUES (?, ?, ?)\", clientes)\ncursor.executemany(\n    \"INSERT INTO produtos VALUES (?, ?, ?, ?)\", produtos)\ncursor.executemany(\n    \"INSERT INTO pedidos VALUES (?, ?, ?)\", pedidos)\ncursor.executemany(\n    \"INSERT INTO itens_pedido VALUES (?, ?, ?)\", itens)\nconexao.commit()", "default_quantidade": "cursor.execute(\"\"\"\nINSERT INTO itens_pedido (id_pedido, id_produto)\nVALUES (1, 1)\n\"\"\")\n\ncursor.execute(\"\"\"\nSELECT * FROM itens_pedido\nWHERE id_pedido = 1 AND id_produto = 1\n\"\"\")\ncursor.fetchall()"};
+        function normalize(s) { return (s || '').replace(/#.*$/gm, '').replace(/--.*$/gm, '').replace(/[\s;]/g, '').replace(/[“”]/g, '"').replace(/[‘’]/g, "'").toLowerCase(); }
+        function validate(code, action) { let n = normalize(code); if (schemaExamples[action]) { return n === normalize(schemaExamples[action]) ? '' : 'Confira a sintaxe e os valores do exemplo. Esta prévia reconhece o código apresentado; variações podem ser executadas no notebook.'; } let miss = (required[action] || []).filter(x => !n.includes(normalize(x))); if (miss.length) return 'Código ainda não corresponde ao exemplo. Verifique: ' + miss.slice(0, 4).join(', ') + (miss.length > 4 ? '...' : '') + '.'; return ''; }
+        document.querySelectorAll('.interactive').forEach(slide => {
+            const ed = slide.querySelector('.ceditor'), action = slide.dataset.action;
+            function text() { return ed.innerText.replace(/\r/g, '').replace(/\u00a0/g, ' '); }
+            ed.addEventListener('keydown', ev => { if (ev.key === 'Tab') { ev.preventDefault(); document.execCommand('insertText', false, '    '); } });
+            ed.addEventListener('paste', ev => { ev.preventDefault(); document.execCommand('insertText', false, (ev.clipboardData || window.clipboardData).getData('text')); });
+            slide.querySelector('.run').onclick = () => {
+                const fb = slide.querySelector('.feedback'), out = slide.querySelector('.output');
+                const err = validate(text(), action);
+                if (err) { fb.className = 'feedback err'; fb.textContent = err; out.innerHTML = ''; return; }
+                fb.className = 'feedback ok'; fb.textContent = '✓ Exemplo reconhecido. Saída prevista abaixo.';
+                out.innerHTML = outputs[action] || '<div class="outbox">OK</div>';
+            };
+        });
+        show(0);
+    </script>
+</body>
+
+</html>
