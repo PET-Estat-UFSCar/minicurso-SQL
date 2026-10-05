@@ -11,6 +11,6 @@ Preserve as indicações de autoria presentes nos arquivos. Ao publicar ou distr
 
 Sugestão de crédito para incluir no material compartilhado:
 
-> Material baseado no minicurso de SQL criado e ministrado pelo PET Estatística da UFSCar. Fonte: repositório minicurso-SQL.
+> Material baseado no minicurso de SQL criado e ministrado pelo PET Estatística da UFSCar. Fonte: [repositório minicurso-SQL.](https://github.com/PET-Estat-UFSCar/minicurso-SQL/tree/main)
 
 ## Estrutura do repositório:
